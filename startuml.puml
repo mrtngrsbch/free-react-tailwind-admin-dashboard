@@ -1,0 +1,22 @@
+@startuml
+!includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+Person(employee, "Empleado")
+Person(manager, "Manager")
+System_Boundary(s1, "Plataforma eNPS") {
+  Container(typeform, "Typeform", "Formulario", "Captura respuestas de eNPS")
+  Container(n8n, "n8n", "Orquestador", "Recibe respuestas, procesa y analiza via LLM")
+  Container(api, "NestJS API", "Backend", "Gestiona dashboard, KPIs, auth")
+  Container(db, "PostgreSQL", "Base de Datos", "Almacena respuestas procesadas")
+  Container(react, "Dashboard React", "Frontend", "Visualiza datos y KPIs")
+}
+
+employee -> typeform : Completa encuesta
+typeform -> n8n : Envia respuestas via webhook
+n8n -> db : Guarda respuestas analizadas
+n8n -> api : Opcional: notificaciones
+manager -> react : Usa dashboard
+react -> api : Consulta KPIs
+api -> db : Lee datos
+
+@enduml

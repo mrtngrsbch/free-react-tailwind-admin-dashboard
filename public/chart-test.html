@@ -1,0 +1,16 @@
+<canvas id="chart-empleados"></canvas>
+<script>
+  const ctx = document.getElementById('chart-empleados');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Motivación', 'Liderazgo', 'Gestión Emocional'],
+      datasets: [{
+        label: 'Puntaje',
+        data: [6.8, 7.3, 6.9],
+        backgroundColor: '#68b684'
+      }]
+    },
+    options: { responsive: true }
+  });
+</script>
